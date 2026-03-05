@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative "initializers/workos"
 
 require "rails/all"
 
@@ -17,11 +18,11 @@ module WorkosRailsDemo
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+
+    # initialize WorkOS
+    WorkOS.configure do |config|
+      config.client_id = ENV.fetch("WORKOS_CLIENT_ID", nil)
+      config.client_secret = ENV.fetch("WORKOS_CLIENT_SECRET", nil)
+    end
   end
 end
