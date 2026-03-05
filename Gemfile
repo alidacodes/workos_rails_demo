@@ -66,3 +66,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "faraday", "~> 2.14"
+
+gem "workos", "~> 6.1"
