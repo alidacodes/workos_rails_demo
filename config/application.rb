@@ -20,9 +20,6 @@ module WorkosRailsDemo
     # Configuration for the application, engines, and railties goes here.
 
     # initialize WorkOS
-    WorkOS.configure do |config|
-      config.client_id = ENV.fetch("WORKOS_CLIENT_ID", nil)
-      config.client_secret = ENV.fetch("WORKOS_CLIENT_SECRET", nil)
-    end
+
   end
 end
