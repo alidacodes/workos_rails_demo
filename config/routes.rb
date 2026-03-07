@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # authentication 
+  # authentication
   get "login", to: "sessions#create", as: :login
   get "auth/callback", to: "sessions#callback"
   delete "logout", to: "sessions#destroy", as: :logout

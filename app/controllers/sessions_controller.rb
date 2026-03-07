@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     redirect_to WorkosApiAdapter.auth_url, allow_other_host: true
   end
-  
+
   def callback
     result = WorkosApiAdapter.callback(params[:code])
     session[:user_id]    = result[:profile].id
