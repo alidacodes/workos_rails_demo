@@ -1,16 +1,28 @@
+require_relative "../lib/adapters/workos_api_adapter"
 class SessionsController < ApplicationController
-  skip_before_action :require_authentication, only: [:new, :create]
-  skip_before_action :check_session_expiry, only: [:new, :create]
-
-  def new
-
-  end
+  skip_before_action :require_authentication, only: [:create, :callback]
+  skip_before_action :check_session_expiry, only: [:create, :callback]
 
   def create
-
+    redirect_to WorkosApiAdapter.auth_url, allow_other_host: true
   end
   
-  def destroy
+  def callback
+    result = WorkosApiAdapter.callback(params[:code])
+    session[:user_id]    = result[:profile].id
+    session[:user_email] = result[:profile].email
+    session[:expires_at] = result[:expires_at]
+    redirect_to root_path, notice: "Successfully logged in with WorkOS SSO."
+  rescue WorkOS::APIError => e
+    logger.error "WorkOS API error: #{e.message}"
+    redirect_to root_path, alert: "Authentication failed. Please try again."
+  rescue => e
+    logger.error "Unexpected error in SSO callback: #{e.class}: #{e.message}\n#{e.backtrace.first(5).join("\n")}"
+    redirect_to root_path, alert: "An error occurred. Please contact support."
+  end
 
+  def destroy
+    sign_out
+    redirect_to root_path, notice: "Successfully logged out."
   end
 end

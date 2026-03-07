@@ -28,7 +28,7 @@ ruby "bin/setup"
 # prompts the user for a key and adds it to the .env file at runtime, if the key is not already present
 source .env
 
-for KEY_NAME in WORKOS_API_KEY WORKOS_CLIENT_NAME
+for KEY_NAME in WORKOS_API_KEY WORKOS_CLIENT_ID WORKOS_REDIRECT_URI WORKOS_ORGANIZATION_ID;
 do
   if grep -q "$KEY_NAME" .env; then
     echo "$KEY_NAME already exists in .env file."
