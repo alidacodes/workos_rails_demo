@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   get "login", to: "sessions#create", as: :login
   get "auth/callback", to: "sessions#callback"
   delete "logout", to: "sessions#destroy", as: :logout
+
+  # directory
+  get "directory", to: "pages#directory", as: :directory
 end
