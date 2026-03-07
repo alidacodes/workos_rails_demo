@@ -20,8 +20,20 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="container">
+    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow flex items-center justify-between px-5">
+      <a href="/" class="font-bold text-lg">@alidacodes</a>
+      <% if authenticated? %>
+        <nav>
+          <span class="font-medium text-slate-600">Welcome, <%= session[:user_first_name] %> <%= session[:user_last_name] %> </span>
+          <%= link_to "Directory", directory_path, class: "m-4" %>
+          <%= link_to "Logout", logout_path, method: :delete %>
+        </nav>
+      <% else %>
+        <%= link_to "Login", login_path %>
+      <% end %>
+    </header>
+    <main class="mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
   </body>

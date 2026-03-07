@@ -9,9 +9,13 @@ class SessionsController < ApplicationController
 
   def callback
     result = WorkosApiAdapter.callback(params[:code])
-    session[:user_id]    = result[:profile].id
-    session[:user_email] = result[:profile].email
-    session[:expires_at] = result[:expires_at]
+    session.update({
+      user_id: result[:profile].id,
+      user_first_name: result[:profile].first_name,
+      user_last_name: result[:profile].last_name,
+      user_email: result[:profile].email,
+      expires_at: result[:expires_at]
+    })
     redirect_to root_path, notice: "Successfully logged in with WorkOS SSO."
   rescue WorkOS::APIError => e
     logger.error "WorkOS API error: #{e.message}"
