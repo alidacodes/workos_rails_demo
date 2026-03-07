@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# This script is the entry point for starting the application. 
+# It checks for the presence of an environment flag, 
+# prompts the user for necessary keys if they are not already present in the .env file,
+# runs the setup script to bootstrap the environment,
+# and starts the appropriate server based on the environment flag provided.
+# usage: `bin/start --dev` for development server, `bin/start --prod` for production server. 
+
+# checks that user passed in an environment flag
+if [ -z "$1" ]; then
+  echo "No environment flag provided. Please provide an environment flag."
+  echo "options: --dev, --prod"
+  echo "usage: bin/start --dev"
+  exit 1
+fi
+
+if [ "$1" != "--dev" ] && [ "$1" != "--prod" ]; then
+  echo "Invalid environment flag provided. Please provide a valid environment flag."
+  echo "options: --dev, --prod"
+  echo "usage: bin/start --dev"
+  exit 1
+fi
+
+# invokes the setup script to bootstrap environment
+ruby "bin/setup"
+
+# prompts the user for a key and adds it to the .env file at runtime, if the key is not already present
+source .env
+
+for KEY_NAME in WORKOS_API_KEY WORKOS_CLIENT_ID WORKOS_REDIRECT_URI WORKOS_ORGANIZATION_ID;
+do
+  if grep -q "$KEY_NAME" .env; then
+    echo "$KEY_NAME already exists in .env file."
+  else
+    read -p "Enter value for $KEY_NAME: " KEY_VALUE
+    echo "$KEY_NAME=$KEY_VALUE" >> .env
+    echo "$KEY_NAME added to .env file."
+  fi
+done
+
+# starts the appropriate server based on the environment flag
+case "$1" in
+  --dev)
+    echo "Starting development server..."
+    export STARTED_BY_BIN_START="true"
+    exec bin/dev
+    ;;
+  --prod)
+    echo "Starting production server..."
+    exec bin/rails server -e production
+    ;;
+esac

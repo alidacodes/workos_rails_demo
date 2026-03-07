@@ -1,4 +1,12 @@
-#!/usr/bin/env sh
+#!/bin/bash
+# This script is the entry point for starting the development server.
+# It checks that it is being run by the correct parent process (bin/start)
+# This script should not be invoked directly, but rather through `bin/start --dev` which will handle environment setup and then call this script to start the development server.
+
+if [ "$STARTED_BY_BIN_START" != "true" ]; then
+  echo "Error: This script can only be run by bin/start." >&2
+  exit 1
+fi
 
 if ! gem list foreman -i --silent; then
   echo "Installing foreman..."

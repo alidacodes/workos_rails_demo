@@ -1,5 +1,4 @@
 require_relative "boot"
-require_relative "initializers/workos"
 
 require "rails/all"
 
@@ -7,6 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "initializers/workos"
 module WorkosRailsDemo
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -18,8 +18,5 @@ module WorkosRailsDemo
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
-
-    # initialize WorkOS
-
   end
 end
