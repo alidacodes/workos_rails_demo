@@ -1,5 +1,12 @@
-you found the directories index!
-
 <% @directories.each do |d| %>
   <%= link_to d.name, directory_path(d.id) %> — <%= d.type %>
 <% end %>
+
+<div>
+  <% if @list_metadata&.[]("before") %>
+    <%= link_to "Previous", directory_path(params[:id], before: @list_metadata["before"]) %>
+  <% end %>
+  <% if @list_metadata&.[]("after") %>
+    <%= link_to "Next", directory_path(params[:id], after: @list_metadata["after"]) %>
+  <% end %>
+</div>

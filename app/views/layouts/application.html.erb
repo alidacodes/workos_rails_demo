@@ -21,10 +21,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="container bg-sky-100 px-20 font-mono">
+  <body class="bg-sky-100 px-20 font-mono">
     <%= render "layouts/partials/nav" %>
-    <main class="mx-auto mt-28 flex text-slate-700">
-      <%= yield %>
+    <main class="mt-28 grid grid-cols-1 justify-items-center content-stretch text-slate-700 gap-8">
+      <div class="col-span-full">
+        <%= render "layouts/partials/flashes" %>
+      </div>
+      <div class="col-span-full self-stretch">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

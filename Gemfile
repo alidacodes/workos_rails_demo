@@ -68,3 +68,5 @@ group :test do
 end
 
 gem "workos", "~> 6.1"
+
+gem "rails_icons", "~> 1.6"
