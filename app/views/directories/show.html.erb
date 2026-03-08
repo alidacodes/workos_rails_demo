@@ -1,29 +1,37 @@
-<h1>Directory Users</h1>
+<h1 class="font-bold text-4xl mb-10">Directory Users for <%= @name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>State</th>
-    </tr>
+<table class="w-full table-auto outline outline-slate-900">
+  <thead class="bg-slate-800 text-slate-50">
+    <tr class="divide-x-2 divide-slate-400">
+      <th class="p-5 pl-8 text-left">Name</th>
+      <th class="p-5 text-left">Email</th>
+      <th class="p-5 text-left">State</th>
+  </tr>
   </thead>
-  <tbody>
+  <tbody class="bg-sky-100">
     <% @users.each do |user| %>
-      <tr>
-        <td><%= "#{user.first_name} #{user.last_name}" %></td>
-        <td><%= user.email %></td>
-        <td><%= user.state %></td>
+      <tr class="divide-x-1 divide-y-1 border-y-1 border-collapse border-slate-600 divide-slate-600">
+        <td class="p-5 pl-8 text-left"><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td class="p-5 text-left"><%= user.email %></td>
+        <td class="p-5 text-left"><%= user.state %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div>
+<div class="flex justify-between w-full font-semibold">
   <% if @list_metadata&.[]("before") %>
-    <%= link_to "Previous", directory_path(params[:id], before: @list_metadata["before"]) %>
+    <span>
+      <%= link_to directory_path(params[:id], name: @name, before: @list_metadata["before"]) do %>
+        <span class="inline-flex items-center-safe"><%= icon "chevron-left", class: "mr-3" %>Previous</span>
+      <% end %>
+    </span>
   <% end %>
   <% if @list_metadata&.[]("after") %>
-    <%= link_to "Next", directory_path(params[:id], after: @list_metadata["after"]) %>
+    <span>
+      <%= link_to directory_path(params[:id], name: @name, after: @list_metadata["after"]) do %>
+        <span class="inline-flex items-center-safe">Next<%= icon "chevron-right", class: "ml-3"%></span>
+      <% end %>
+    </span>
   <% end %>
 </div>

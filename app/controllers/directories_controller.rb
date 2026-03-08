@@ -12,6 +12,7 @@ class DirectoriesController < ApplicationController
       after: params[:after],
       before: params[:before]
     )
+    @name = params[:name]
     @users = result[:users]
     @list_metadata = result[:list_metadata]
   end
