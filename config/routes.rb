@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy", as: :logout
 
   # directories
-  resources :directories, only: [:index, :show], param: :id 
+  resources :directories, only: [:index, :show], param: :id
 end

@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 module WorkosApiAdapter
   CLIENT_ID = ENV.fetch("WORKOS_CLIENT_ID")
@@ -39,7 +39,7 @@ module WorkosApiAdapter
       )
     end
   end
-  
+
   def self.fetch_directory_user_list(directory_id:, limit: 25, after: nil, before: nil)
     params = { directory: directory_id, limit: limit }
     params[:after] = after if after
