@@ -1,0 +1,29 @@
+<h1>Directory Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.email %></td>
+        <td><%= user.state %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <% if @list_metadata&.[]("before") %>
+    <%= link_to "Previous", directory_path(params[:id], before: @list_metadata["before"]) %>
+  <% end %>
+  <% if @list_metadata&.[]("after") %>
+    <%= link_to "Next", directory_path(params[:id], after: @list_metadata["after"]) %>
+  <% end %>
+</div>

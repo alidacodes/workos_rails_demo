@@ -1,10 +1,15 @@
+require 'ostruct'
+
 module WorkosApiAdapter
+  CLIENT_ID = ENV.fetch("WORKOS_CLIENT_ID")
+  ORGANIZATION_ID = ENV.fetch("WORKOS_ORGANIZATION_ID")
+  REDIRECT_URI = ENV.fetch("WORKOS_REDIRECT_URI")
   # authenticate via SSO
   def self.auth_url
     WorkOS::SSO.authorization_url(
-      client_id: ENV.fetch("WORKOS_CLIENT_ID"),
-      organization: ENV.fetch("WORKOS_ORGANIZATION_ID"),
-      redirect_uri: ENV.fetch("WORKOS_REDIRECT_URI"),
+      client_id: CLIENT_ID,
+      organization: ORGANIZATION_ID,
+      redirect_uri: REDIRECT_URI,
     )
   end
 
@@ -12,7 +17,7 @@ module WorkosApiAdapter
     response = profile_and_token(code)
     profile = response.profile
 
-    if profile.organization_id != ENV.fetch("WORKOS_ORGANIZATION_ID")
+    if profile.organization_id != ORGANIZATION_ID
       raise UnauthorizedError, "Unauthorized: Organization ID does not match expected value"
     end
 
@@ -20,18 +25,47 @@ module WorkosApiAdapter
   end
 
   def self.list_directories
-    WorkOS::DirectorySync.list_directories(organization_id: ENV.fetch("WORKOS_ORGANIZATION_ID"))
+    # get directories for the environment's organization
+    directories = WorkOS::DirectorySync.list_directories(organization_id: ORGANIZATION_ID)
+    # normalize the result into simple objects with just the data we need for our app
+    # see https://github.com/workos/workos-ruby/blob/main/lib/workos/types/list_struct.rb
+    directories.data.map do |directory|
+      OpenStruct.new(
+        id: directory.id,
+        name: directory.name,
+        type: directory.type,
+        created_at: directory.created_at,
+        updated_at: directory.updated_at
+      )
+    end
   end
   
-  def self.fetch_directory(directory_id)
-    WorkOS::DirectorySync.get_directory(directory_id)
+  def self.fetch_directory_user_list(directory_id:, limit: 25, after: nil, before: nil)
+    params = { directory: directory_id, limit: limit }
+    params[:after] = after if after
+    params[:before] = before if before
+
+    result = WorkOS::DirectorySync.list_users(**params)
+
+    users = result.data.map do |user|
+      OpenStruct.new(
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        groups: user.groups,
+        state: user.state
+      )
+    end
+
+    { users: users, list_metadata: result.list_metadata }
   end
 
   private
 
   def self.profile_and_token(code)
     WorkOS::SSO.profile_and_token(
-      client_id: ENV.fetch("WORKOS_CLIENT_ID"),
+      client_id: CLIENT_ID,
       code: code,
     )
   end
