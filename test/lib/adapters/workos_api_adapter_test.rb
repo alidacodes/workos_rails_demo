@@ -31,7 +31,8 @@ class WorkosApiAdapterTest < ActiveSupport::TestCase
       groups: [],
       state: "active"
     )
-    @mock_metadata = OpenStruct.new(before: nil, after: "cursor_abc")
+    # WorkOS returns list_metadata as a Hash with string keys (from parsed JSON)
+    @mock_metadata = { "before" => nil, "after" => "cursor_abc" }
     @mock_user_list = OpenStruct.new(data: [ @mock_user ], list_metadata: @mock_metadata)
   end
 

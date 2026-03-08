@@ -38,7 +38,8 @@ class DirectoriesControllerTest < ActionDispatch::IntegrationTest
         state: "active"
       )
     ]
-    @mock_metadata = OpenStruct.new(before: nil, after: "cursor_abc")
+    # WorkOS returns list_metadata as a Hash with string keys (from parsed JSON)
+    @mock_metadata = { "before" => nil, "after" => "cursor_abc" }
     @mock_user_result = { users: @mock_users, list_metadata: @mock_metadata }
   end
 
@@ -55,6 +56,7 @@ class DirectoriesControllerTest < ActionDispatch::IntegrationTest
       get directory_url(id: "dir_1"), params: { name: "Acme Corp" }
       assert_response :success
       assert_match "Alice", response.body
+      assert_match "Next", response.body  # after cursor present → Next link renders
     end
   end
 

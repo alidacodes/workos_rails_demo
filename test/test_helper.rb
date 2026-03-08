@@ -1,14 +1,15 @@
 ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
-require "ostruct"
 
-# Default WorkOS env vars for test — real CI secrets override these via ENV
+# Default WorkOS env vars for test — must be set before config/environment loads
+# the workos initializer. Real CI secrets override these via ENV.
 ENV["WORKOS_API_KEY"]         ||= "test_api_key"
 ENV["WORKOS_CLIENT_ID"]       ||= "test_client_id"
 ENV["WORKOS_ORGANIZATION_ID"] ||= "test_org_id"
 ENV["WORKOS_REDIRECT_URI"]    ||= "http://localhost:3000/auth/callback"
 
+require_relative "../config/environment"
+require "rails/test_help"
+require "ostruct"
 require_relative "../app/lib/adapters/workos_api_adapter"
 
 module ActiveSupport

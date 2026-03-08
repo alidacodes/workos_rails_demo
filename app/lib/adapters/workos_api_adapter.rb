@@ -77,7 +77,7 @@ module WorkosApiAdapter
     return 1.hour.from_now.to_i if payload_b64.nil?
     padding = (4 - payload_b64.length % 4) % 4
     JSON.parse(Base64.urlsafe_decode64(payload_b64 + "=" * padding))["exp"] || 1.hour.from_now.to_i
-  rescue
+  rescue JSON::ParserError, ArgumentError, TypeError
     1.hour.from_now.to_i
   end
 end
