@@ -34,8 +34,8 @@ module WorkosApiAdapter
         id: directory.id,
         name: directory.name,
         type: directory.type,
-        created_at: directory.created_at,
-        updated_at: directory.updated_at
+        created_at: Time.zone.parse(directory.created_at).strftime("%B %d, %Y %H:%M"),
+        updated_at: Time.zone.parse(directory.updated_at).strftime("%B %d, %Y %H:%M")
       )
     end
   end

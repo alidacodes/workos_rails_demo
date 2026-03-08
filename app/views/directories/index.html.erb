@@ -1,12 +1,25 @@
-<% @directories.each do |d| %>
-  <%= link_to d.name, directory_path(d.id) %> — <%= d.type %>
-<% end %>
-
-<div>
-  <% if @list_metadata&.[]("before") %>
-    <%= link_to "Previous", directory_path(params[:id], before: @list_metadata["before"]) %>
-  <% end %>
-  <% if @list_metadata&.[]("after") %>
-    <%= link_to "Next", directory_path(params[:id], after: @list_metadata["after"]) %>
-  <% end %>
-</div>
+<h1 class="font-bold text-4xl mb-10">Directories Listing</h1>
+<table class="w-full table-auto outline outline-slate-900">
+  <thead class="bg-slate-800 text-slate-50">
+    <tr class="divide-x-2 divide-slate-400">
+      <th class="p-5 pl-8 text-left">Name</th>
+      <th class="p-5 text-left">Type</th>
+      <th class="p-5 text-left">Created At</th>
+      <th class="p-5 text-left">Last Updated At</th>
+    </tr>
+  </thead>
+  <tbody class="bg-sky-100">
+    <% @directories.each do |d| %>
+      <tr class="divide-x-1 border-y-1 border-collapse border-slate-600 divide-slate-600">
+        <td class="p-5 pl-8 text-left">
+          <%= link_to directory_path(d.id, name: d.name) do %>
+            <span class="font-semibold hover:text-sky-500"><%= d.name %><%= icon "chevron-right", class: "inline mx-auto" %></span>
+          <% end %>
+        </td>
+        <td class="p-5 text-left"><%= d.type %></td>
+        <td class="p-5 text-left"><%= d.created_at %></td>
+        <td class="p-5 text-left"><%= d.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
