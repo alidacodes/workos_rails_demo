@@ -1,6 +1,8 @@
 require "ostruct"
 
 module WorkosApiAdapter
+  class UnauthorizedError < StandardError; end
+
   CLIENT_ID = ENV.fetch("WORKOS_CLIENT_ID")
   ORGANIZATION_ID = ENV.fetch("WORKOS_ORGANIZATION_ID")
   REDIRECT_URI = ENV.fetch("WORKOS_REDIRECT_URI")

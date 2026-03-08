@@ -1,8 +1,14 @@
 require "test_helper"
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
-  test "should get pages#home as root_path" do
-    get root_path
+  test "home is accessible without authentication" do
+    get root_url
+    assert_response :success
+  end
+
+  test "home is accessible when authenticated" do
+    login
+    get root_url
     assert_response :success
   end
 end
