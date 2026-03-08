@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Workos Rails Demo">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbo-prefetch" content="false">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -20,20 +21,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="container">
-    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow flex items-center justify-between px-5">
-      <a href="/" class="font-bold text-lg">@alidacodes</a>
-      <% if authenticated? %>
-        <nav>
-          <span class="font-medium text-slate-600">Welcome, <%= session[:user_first_name] %> <%= session[:user_last_name] %> </span>
-          <%= link_to "Directory", directory_path, class: "m-4" %>
-          <%= link_to "Logout", logout_path, method: :delete %>
-        </nav>
-      <% else %>
-        <%= link_to "Login", login_path %>
-      <% end %>
-    </header>
-    <main class="mx-auto mt-28 px-5 flex">
+  <body class="container bg-sky-100 px-20 font-mono">
+    <%= render "layouts/partials/nav" %>
+    <main class="mx-auto mt-28 flex text-slate-700">
       <%= yield %>
     </main>
   </body>
