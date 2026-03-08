@@ -3,6 +3,14 @@
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
+# WorkOS env var defaults for test — set here so they're available before
+# initializers run, regardless of how the Rails process is invoked.
+# Real CI secrets override these via ENV.
+ENV["WORKOS_API_KEY"]         ||= "test_api_key"
+ENV["WORKOS_CLIENT_ID"]       ||= "test_client_id"
+ENV["WORKOS_ORGANIZATION_ID"] ||= "test_org_id"
+ENV["WORKOS_REDIRECT_URI"]    ||= "http://localhost:3000/auth/callback"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
