@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   get "auth/callback", to: "sessions#callback"
   get "logout", to: "sessions#destroy", as: :logout
 
-  # directory
-  get "directory", to: "pages#directory", as: :directory
+  # directories
+  resources :directories, only: [:index, :show], param: :id 
 end

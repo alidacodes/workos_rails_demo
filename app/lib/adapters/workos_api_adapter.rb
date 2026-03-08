@@ -19,6 +19,14 @@ module WorkosApiAdapter
     { profile: profile, expires_at: token_expiry(response.access_token) }
   end
 
+  def self.list_directories
+    WorkOS::DirectorySync.list_directories(organization_id: ENV.fetch("WORKOS_ORGANIZATION_ID"))
+  end
+  
+  def self.fetch_directory(directory_id)
+    WorkOS::DirectorySync.get_directory(directory_id)
+  end
+
   private
 
   def self.profile_and_token(code)
