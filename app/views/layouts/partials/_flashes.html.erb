@@ -1,0 +1,5 @@
+<% flash.each do |type, messages| %>
+  <% Array(messages).each do |message| %>
+    <%= render "layouts/partials/flash", type:, message: %>
+  <% end %>
+<% end %>

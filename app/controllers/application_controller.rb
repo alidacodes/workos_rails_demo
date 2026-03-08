@@ -18,14 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_authentication
-    redirect_to login_path, alert: "Please log in." unless session[:user_id]
+    redirect_to root_path, alert: "Please log in." unless session[:user_id]
   end
 
   def check_session_expiry
     return unless session[:expires_at]
     if Time.now.to_i > session[:expires_at]
       sign_out
-      redirect_to login_path, alert: "Your session has expired. Please log in again."
+      redirect_to root_path, alert: "Your session has expired. Please log in again."
     end
   end
 
