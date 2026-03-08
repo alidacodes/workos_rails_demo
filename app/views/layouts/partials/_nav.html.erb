@@ -1,5 +1,5 @@
 <header class="fixed top-0 left-0 w-full h-16 bg-linear-to-r from-sky-700 to-slate-800 flex items-center px-20 justify-between text-slate-50">
-  <a href="/" class="font-bold text-lg">@alidacodes</a>
+  <a href="/" class="font-bold text-lg">SSO Portal Demo</a>
   
   <% if authenticated? %>
     <!-- Desktop Navigation -->
@@ -13,7 +13,7 @@
 
     <!-- Mobile Menu Container -->
     <div class="sm:hidden" data-controller="mobile-menu">
-      <button data-mobile-menu-target="button" data-action="mobile-menu#toggle">☰</button>
+      <button data-mobile-menu-target="button" data-action="mobile-menu#toggle"><%= icon "hamburger-menu", class: "inline mb-1" %></button>
       <nav data-mobile-menu-target="menu" class="hidden absolute top-16 left-0 w-full bg-slate-800 flex-col">
         <span class="font-medium text-cyan-200 p-4 block">Welcome, <%= session[:user_first_name] %> <%= session[:user_last_name] %> </span>
         <%= link_to "Directories", directories_path, class: "block p-4 hover:text-cyan-400" %>

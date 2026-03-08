@@ -1,0 +1,11 @@
+<div class="bg-slate-300 p-10 pb-6 rounded-2xl shadow-lg flex flex-col gap-3 items-center w-full max-w-md">
+  <h2 class="font-medium text-2xl mb-6">You are logged in, <%= session[:user_first_name] %> <%= session[:user_last_name] %>. Welcome!</h2>
+  <span class="text-sm text-slate-600 mb-6">You can now view your organization's directory users by clicking the button below.</span>
+  <%= link_to directories_path, class: "bg-sky-950 text-slate-50 px-8 py-5 rounded-xl inline-flex items-center-safe font-semibold text-lg mb-4" do %>
+    <span class="inline-flex items-center-safe">View Directories <%= icon "backpack", class: "inline ml-3" %></span>
+  <% end %>
+  <%= link_to logout_path, method: :delete, class: "bg-rose-950 text-slate-50 px-8 py-5 rounded-xl inline-flex items-center-safe font-semibold text-lg" do %>
+    <span class="inline-flex items-center-safe">Log out <%= icon "exit", class: "inline ml-3" %></span>
+  <% end %>
+  <span class="text-xs text-slate-600 mt-4">Powered by WorkOS and Okta</span>
+</div>
