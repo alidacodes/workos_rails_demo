@@ -22,11 +22,8 @@ if [ "$1" != "--dev" ] && [ "$1" != "--prod" ]; then
   exit 1
 fi
 
-# invokes the setup script to bootstrap environment
-ruby "bin/setup"
-
 # prompts the user for a key and adds it to the .env file at runtime, if the key is not already present
-source .env
+[ -f .env ] && source .env
 
 for KEY_NAME in WORKOS_API_KEY WORKOS_CLIENT_ID WORKOS_REDIRECT_URI WORKOS_ORGANIZATION_ID;
 do
@@ -38,6 +35,13 @@ do
     echo "$KEY_NAME added to .env file."
   fi
 done
+
+# invokes the setup script to bootstrap environment (runs after env vars are loaded)
+# set -a exports all sourced variables to child processes (e.g. ruby bin/setup)
+set -a
+source .env
+set +a
+ruby "bin/setup"
 
 # starts the appropriate server based on the environment flag
 case "$1" in
