@@ -4,7 +4,7 @@
   <%= link_to directories_path, class: "bg-sky-950 text-slate-50 px-8 py-5 rounded-xl inline-flex items-center-safe font-semibold text-lg mb-4" do %>
     <span class="inline-flex items-center-safe">View Directories <%= icon "backpack", class: "inline ml-3" %></span>
   <% end %>
-  <%= link_to logout_path, method: :delete, class: "bg-rose-950 text-slate-50 px-8 py-5 rounded-xl inline-flex items-center-safe font-semibold text-lg", data: { turbo_method: :delete } do %>
+  <%= link_to logout_path, class: "bg-rose-950 text-slate-50 px-8 py-5 rounded-xl inline-flex items-center-safe font-semibold text-lg", data: { turbo_method: :delete } do %>
     <span class="inline-flex items-center-safe">Log out <%= icon "exit", class: "inline ml-3" %></span>
   <% end %>
   <span class="text-xs text-slate-600 mt-4">Powered by WorkOS and Okta</span>

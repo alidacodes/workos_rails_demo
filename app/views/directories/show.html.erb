@@ -1,4 +1,4 @@
-<h1 class="font-bold text-4xl mb-10">Directory Users for <%= @name %></h1>
+<h1 class="font-bold text-4xl mb-10">Directory Users<%= " for #{@name}" if @name.present? %></h1>
 
 <table class="w-full table-auto outline outline-slate-900">
   <thead class="bg-slate-800 text-slate-50">

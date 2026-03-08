@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 
   def callback
     result = WorkosApiAdapter.callback(params[:code])
+    reset_session
     session.update({
       user_id: result[:profile].id,
       user_first_name: result[:profile].first_name,

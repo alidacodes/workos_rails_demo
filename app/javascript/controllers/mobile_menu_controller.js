@@ -14,6 +14,11 @@ export default class extends Controller {
 
   connect() {
     // Close menu when page navigates (handles Turbo)
-    this.element.addEventListener("turbo:load", () => this.close())
+    this._close = () => this.close()
+    document.addEventListener("turbo:visit", this._close)
+  }
+
+  disconnect() {
+    document.removeEventListener("turbo:visit", this._close)
   }
 }
