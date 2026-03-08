@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       user_first_name: result[:profile].first_name,
       user_last_name: result[:profile].last_name,
       user_email: result[:profile].email,
+      user_idp_id: result[:profile].idp_id ||= result[:profile].id,
       expires_at: result[:expires_at]
     })
     redirect_to root_path, notice: "Successfully logged in with WorkOS SSO."
