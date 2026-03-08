@@ -6,6 +6,13 @@ class DirectoriesController < ApplicationController
   end
 
   def show
-    @directory = WorkosApiAdapter.fetch_directory(params[:id])
+    result = WorkosApiAdapter.fetch_directory_user_list(
+      directory_id: params[:id],
+      limit: 25,
+      after: params[:after],
+      before: params[:before]
+    )
+    @users = result[:users]
+    @list_metadata = result[:list_metadata]
   end
 end

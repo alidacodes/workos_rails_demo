@@ -1,6 +1,5 @@
 you found the directories index!
 
 <% @directories.each do |d| %>
-  <%= d.name %>
-  <%= d.type %>
+  <%= link_to d.name, directory_path(d.id) %> — <%= d.type %>
 <% end %>
