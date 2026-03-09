@@ -20,8 +20,8 @@ Browser
   │         └─ WorkosApiAdapter#callback(code)
   │              ├─ exchange code for profile + token
   │              ├─ validate organization
-  │              ├─ decode JWT → session[:expires_at]
-  │              └─ store user info in Rails session
+  │              ├─ explicitly set client-side expiry
+  │              └─ store user info in Rails session via server-side cache
   │
   ├─ GET /directories     → DirectoriesController#index
   │    └─ WorkosApiAdapter#list_directories
@@ -70,6 +70,8 @@ workos_rails_demo/
 ### Framework choices
 
 **Why build your own with Rails 8? Why not use one of the [Ruby example applications](https://github.com/workos/ruby-example-applications)?**
+
+I wanted to build a demo of standalone SSO in Rails 8. WorkOS has a [Ruby and Sinatra light-weight AuthKit example](https://github.com/workos/ruby-authkit-example), but the current Rails examples have been archived and are a few major Rails versions past-date. I saw the recent [Rails Authentication in 2026 blog article](https://workos.com/blog/rails-authentication-guide-2026) from WorkOS, and wanted to explore what it would look like to implement the standalone SSO API in this way.
 
 ### Session-based authentication and defensive session management
 
