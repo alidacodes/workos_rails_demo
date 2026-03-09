@@ -7,8 +7,8 @@ This Rails app is a demo of using the Standalone SSO and DirectorySync APIs from
 Made with:
 
 - Rails 8.1.2
-- [WorkOS Ruby SDK](https://github.com/workos/workos-ruby) version `6.1.0`
-- [Tailwind CSS](https://tailwindcss.com/) for light styling, via the [`tailwindcss-rails` gem](https://github.com/rails/tailwindcss-rails)
+- [WorkOS Ruby SDK](https://github.com/workos/workos-ruby) version 6.1.0
+- [Tailwind CSS](https://tailwindcss.com/) v4 for light styling, via the [tailwindcss-rails gem](https://github.com/rails/tailwindcss-rails)
 - [Radix icon](https://www.radix-ui.com/icons) support via the [rails_icons gem](https://github.com/rails-designer/rails_icons)
 - Love! 💖
 
