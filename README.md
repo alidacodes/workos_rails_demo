@@ -49,7 +49,7 @@ command -v sqlite3 # so we can check install without running sqlite3
   - your Organization ID (`WORKOS_ORGANIZATION_ID`), which you can find in your [WorkOS Dashboard](https://dashboard.workos.com/) under **Organizations > Organization details** for your Okta-connected organization. This ID will be prefixed with `org_`
   - A Redirect URI, as configured in the **Redirects** settings of your [WorkOS Dashboard](https://dashboard.workos.com/); for local development, `http://localhost:3000/auth/callback` is sufficient.
 
-## Get running
+### Get running
 
 1. Clone this repo:
 
