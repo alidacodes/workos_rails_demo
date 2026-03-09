@@ -17,5 +17,11 @@ module WorkosRailsDemo
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
+
+    # Store sessions server-side in solid_cache; cookie holds only an opaque encrypted ID.
+    # expire_after is set slightly longer than session_expiry (1.hour in the adapter)
+    # so check_session_expiry always fires first with a meaningful UX message
+    # before the cache TTL silently evicts the entry as a hard backstop.
+    config.session_store :cache_store, expire_after: 70.minutes
   end
 end
