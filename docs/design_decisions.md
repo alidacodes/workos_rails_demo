@@ -77,7 +77,7 @@ I wanted to build a demo of standalone SSO in Rails 8. WorkOS has a [Ruby and Si
 
 **Why use session-based auth over storing tokens?**
 
-- It reduces the need for client-side token management
+It reduces the need for client-side token management.
 
 **Why use server-side session storage via cache? And why manually set an `:expires_at` value if you already have an explicit TTL for the session stored in the cache?**
 
