@@ -56,7 +56,7 @@ command -v sqlite3 # so we can check install without running sqlite3
    `git clone https://github.com/alidacodes/workos_rails_demo.git && cd workos_rails_demo`
 
 2. From here, you have two options: Pre-configure your `.env` or configure interactively during first launch.
-   1. **Preconfigure your env.**
+   1. **Preconfigure your `.env`**
       - Copy the `.env.example` as `.env`:
 
          `cp .env.example .env`
