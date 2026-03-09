@@ -16,6 +16,10 @@ For more information on how this was built, see [Design Decisions & Tradeoffs](#
 
 ## Demo Screencast
 
+
+https://github.com/user-attachments/assets/3ee7acc6-203a-409b-9c84-9060fd6dacc8
+
+
 ## Getting Started in Development
 
 Given the opinionated nature of this demo, running this app makes a few assumptions, which are outlined in the [Pre-launch setup](#pre-launch-setup).
