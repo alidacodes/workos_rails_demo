@@ -23,7 +23,7 @@ module WorkosApiAdapter
       raise UnauthorizedError, "Unauthorized: Organization ID does not match expected value"
     end
 
-    { profile: profile, expires_at: token_expiry(response.access_token) }
+    { profile: profile, expires_at: session_expiry }
   end
 
   def self.list_directories
@@ -72,12 +72,7 @@ module WorkosApiAdapter
     )
   end
 
-  def self.token_expiry(access_token)
-    payload_b64 = access_token.split(".")[1]
-    return 1.hour.from_now.to_i if payload_b64.nil?
-    padding = (4 - payload_b64.length % 4) % 4
-    JSON.parse(Base64.urlsafe_decode64(payload_b64 + "=" * padding))["exp"] || 1.hour.from_now.to_i
-  rescue JSON::ParserError, ArgumentError, TypeError
+  def self.session_expiry
     1.hour.from_now.to_i
   end
 end

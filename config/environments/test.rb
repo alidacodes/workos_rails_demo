@@ -29,6 +29,9 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
   config.cache_store = :null_store
+  # Use cookie store in tests so sessions persist across requests without a live cache.
+  # The null_store above would discard cache-backed sessions, breaking auth tests.
+  config.session_store :cookie_store, key: "_workos_rails_demo_session"
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
