@@ -69,6 +69,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "workos", "~> 6.1"
+gem "workos", "~> 6.2"
 
 gem "rails_icons", "~> 1.6"

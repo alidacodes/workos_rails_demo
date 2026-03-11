@@ -376,7 +376,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    workos (6.1.0)
+    workos (6.2.0)
       encryptor (~> 3.0)
       jwt (~> 3.1)
     xpath (3.2.0)
@@ -415,7 +415,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  workos (~> 6.1)
+  workos (~> 6.2)
 
 BUNDLED WITH
   4.0.7
