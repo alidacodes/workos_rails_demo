@@ -1,10 +1,14 @@
 require_relative "../lib/adapters/workos_api_adapter"
 class SessionsController < ApplicationController
-  skip_before_action :require_authentication, only: [:create, :callback]
-  skip_before_action :check_session_expiry, only: [:create, :callback]
+  skip_before_action :require_authentication, only: [:create, :create_entra, :callback]
+  skip_before_action :check_session_expiry, only: [:create, :create_entra, :callback]
 
   def create
     redirect_to WorkosApiAdapter.auth_url, allow_other_host: true
+  end
+
+  def create_entra
+    redirect_to WorkosApiAdapter.entra_auth_url, allow_other_host: true
   end
 
   def callback

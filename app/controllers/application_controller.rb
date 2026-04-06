@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :authenticated?
 
+  rescue_from ActionController::RoutingError, with: :render_404
+  
+  def render_404
+    render file: Rails.root.join("public/404.html"), status: :not_found, layout: false
+  end
+
   private
 
   def authenticated?

@@ -23,8 +23,13 @@
       </nav>
     </div>
   <% else %>
-    <%= link_to login_path, class: "m-4 hover:text-cyan-400" do %>
+  <div class="flex items-center">
+    <%= link_to login_path, class: "ml-4 hover:text-cyan-400" do %>
       <span class="items-center">Login <%= icon "enter", class: "inline mb-1" %></span>
     <% end %>
+    <%= link_to login_entra_path, class: "ml-4 hover:text-cyan-400" do %>
+      <span class="items-center">Login with Entra <%= icon "enter", class: "inline mb-1" %></span>
+    <% end %>
+  </div>
   <% end %>
 </header>
