@@ -44,14 +44,16 @@ set +a
 ruby "bin/setup"
 
 # starts the appropriate server based on the environment flag
-case "$1" in
-  --dev)
-    echo "Starting development server..."
-    export STARTED_BY_BIN_START="true"
-    exec bin/dev
-    ;;
-  --prod)
-    echo "Starting production server..."
-    exec bin/rails server -e production
-    ;;
-esac
+if [ -z "$2" ]; then
+  case "$1" in
+    --dev)
+      echo "Starting development server..."
+      export STARTED_BY_BIN_START="true"
+      exec bin/dev
+      ;;
+    --prod)
+      echo "Starting production server..."
+      exec bin/rails server -e production
+      ;;
+  esac
+fi
