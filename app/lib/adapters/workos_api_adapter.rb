@@ -7,7 +7,7 @@ module WorkosApiAdapter
   ORGANIZATION_ID = ENV.fetch("WORKOS_ORGANIZATION_ID")
   ENTRA_ORG_ID = ENV.fetch("WORKOS_ENTRA_ORG_ID")
   REDIRECT_URI = ENV.fetch("WORKOS_REDIRECT_URI")
-  
+
   # authenticate via SSO
   def self.auth_url
     WorkOS::SSO.authorization_url(

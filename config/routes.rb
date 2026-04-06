@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
   # authentication
-  get "login", to: "sessions#create", as: :login, 
-  get "login_entra", to: "sessions#create_entra", as: :login_entra
+  get "login", to: "sessions#create", as: :login
+  get "login_entra", to: "sessions#create_entra"
   get "auth/callback", to: "sessions#callback"
   delete "logout", to: "sessions#destroy", as: :logout
 
