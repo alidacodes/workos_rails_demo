@@ -5,7 +5,9 @@ module WorkosApiAdapter
 
   CLIENT_ID = ENV.fetch("WORKOS_CLIENT_ID")
   ORGANIZATION_ID = ENV.fetch("WORKOS_ORGANIZATION_ID")
+  ENTRA_ORG_ID = ENV.fetch("WORKOS_ENTRA_ORG_ID")
   REDIRECT_URI = ENV.fetch("WORKOS_REDIRECT_URI")
+  
   # authenticate via SSO
   def self.auth_url
     WorkOS::SSO.authorization_url(
@@ -15,11 +17,19 @@ module WorkosApiAdapter
     )
   end
 
+  def self.entra_auth_url
+    WorkOS::SSO.authorization_url(
+      client_id: CLIENT_ID,
+      organization: ENTRA_ORG_ID,
+      redirect_uri: REDIRECT_URI,
+    )
+  end
+
   def self.callback(code)
     response = profile_and_token(code)
     profile = response.profile
 
-    if profile.organization_id != ORGANIZATION_ID
+    if profile.organization_id != ORGANIZATION_ID && profile.organization_id != ENTRA_ORG_ID
       raise UnauthorizedError, "Unauthorized: Organization ID does not match expected value"
     end
 
